@@ -23,7 +23,7 @@ import java.util.Set;
 import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
 
-public class TestRegistryObjectMetacardType {
+public class RegistryObjectMetacardTypeTest {
 
   private static final String[] ATTRIBUTE_DESCRIPTORS = {
     RegistryObjectMetacardType.SECURITY_LEVEL,

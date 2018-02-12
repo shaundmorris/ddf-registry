@@ -94,7 +94,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 
-public class TestRegistryStore {
+public class RegistryStoreTest {
 
   private RegistryStoreImpl registryStore;
 

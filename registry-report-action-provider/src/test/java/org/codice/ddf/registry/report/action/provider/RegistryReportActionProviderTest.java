@@ -43,7 +43,7 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 
-public class TestRegistryReportActionProvider {
+public class RegistryReportActionProviderTest {
 
   private static final String SAMPLE_PATH = "/internal/registries/";
 

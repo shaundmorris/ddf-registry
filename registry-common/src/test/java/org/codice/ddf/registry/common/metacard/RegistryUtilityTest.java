@@ -28,7 +28,7 @@ import org.codice.ddf.registry.common.RegistryConstants;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestRegistryUtility {
+public class RegistryUtilityTest {
 
   private static final String VALID_REGISTRY_ID = "urn:uuid:922145e890bb458696526a7550e3c0b0";
 
