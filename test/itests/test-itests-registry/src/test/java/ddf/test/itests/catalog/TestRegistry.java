@@ -98,30 +98,9 @@ public class TestRegistry extends AbstractIntegrationTest {
 
   private Set<String> destinations;
 
-  protected static final String[] DEFAULT_REQUIRED_APPS = {
-    "catalog-app", "solr-app", "spatial-app"
-  };
-
   @Override
   protected String[] getDefaultRequiredApps() {
     return Arrays.copyOf(DEFAULT_REQUIRED_APPS, DEFAULT_REQUIRED_APPS.length);
-  }
-
-  @Override
-  public void waitForBaseSystemFeatures() {
-    try {
-      basePort = getBasePort();
-      getServiceManager().startFeature(true, getDefaultRequiredApps());
-      getServiceManager().waitForAllBundles();
-      getCatalogBundle().waitForCatalogProvider();
-
-      getServiceManager().waitForHttpEndpoint(SERVICE_ROOT + "/catalog/query?_wadl");
-      getServiceManager().waitForHttpEndpoint(SERVICE_ROOT + "/csw?_wadl");
-      getServiceManager().waitForHttpEndpoint(SERVICE_ROOT + "/catalog?_wadl");
-      getServiceManager().waitForAllBundles();
-    } catch (Exception e) {
-      throw new IllegalStateException("Failed to start up required features.", e);
-    }
   }
 
   public static String getCswRegistryInsert(String id, String regId) throws IOException {

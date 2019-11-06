@@ -26,6 +26,7 @@
     <name>DDF :: Registry</name>
     <properties>
         <ddf.version>2.20.0</ddf.version>
+        <mariadb.version>2.4.1</mariadb.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -191,6 +192,83 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>${snapshots.repository.url}</url>
+        </snapshotRepository>
+        <repository>
+            <id>releases</id>
+            <url>${releases.repository.url}</url>
+        </repository>
+        <site>
+            <id>reports</id>
+            <url>${reports.repository.url}</url>
+        </site>
+    </distributionManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <dependencies>
+                        <dependency>
+                            <groupId>ddf.support</groupId>
+                            <artifactId>support-owasp</artifactId>
+                            <version>${ddf.support.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.mariadb.jdbc</groupId>
+                            <artifactId>mariadb-java-client</artifactId>
+                            <version>${mariadb.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                         <!-- The following properties enable using a centralized nvd server -->
+                        <autoUpdate>${owasp.autoUpdate}</autoUpdate>
+                        <databaseDriverName>${owasp.database.driverName}</databaseDriverName>
+                        <connectionString>${owasp.database.url}</connectionString>
+                        <serverId>${owasp.serverId}</serverId>
+                        <!-- End Centralized NVD Server Configuration -->
+                        <!-- Commented out as we make a process for handling these -->
+                        <!--<failBuildOnCVSS>7</failBuildOnCVSS>-->
+                        <!-- occasionally seeing a "Failed to request component-reports" error -->
+                        <failOnError>false</failOnError>
+                        <skipTestScope>true</skipTestScope>
+                        <!--Disable by plugin maintainer recommendation on https://github.com/jeremylong/DependencyCheck/issues/978#issuecomment-349620687-->
+                        <centralAnalyzerEnabled>false</centralAnalyzerEnabled>
+                        <!--Disable .NET analyzers-->
+                        <nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
+                        <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                        <!--Analyzes Ruby Gemfile.lock files, not OSGi bundles-->
+                        <bundleAuditAnalyzerEnabled>false</bundleAuditAnalyzerEnabled>
+                        <!--We don't use CMake, CocoaPods, AutoConf, or Ruby-->
+                        <cmakeAnalyzerEnabled>false</cmakeAnalyzerEnabled>
+                        <cocoapodsAnalyzerEnabled>false</cocoapodsAnalyzerEnabled>
+                        <autoconfAnalyzerEnabled>false</autoconfAnalyzerEnabled>
+                        <rubygemsAnalyzerEnabled>false</rubygemsAnalyzerEnabled>
+                        <nodeAnalyzerEnabled>false</nodeAnalyzerEnabled>
+
+                        <!-- This prevents a build failure on jdk tools jar -->
+                        <skipSystemScope>true</skipSystemScope>
+                        <formats>
+                            <format>HTML</format>
+                            <format>JUNIT</format>
+                        </formats>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
     <modules>
         <module>registry-policy-plugin</module>
         <module>registry-ebrim-transformer</module>

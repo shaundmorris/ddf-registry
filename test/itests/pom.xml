@@ -21,7 +21,7 @@
     </parent>
     <groupId>ddf.test.itests.registry</groupId>
     <artifactId>itests</artifactId>
-    <name>DDF :: Test :: Integration Tests :: Registy </name>
+    <name>DDF Registry :: Test :: Integration Tests</name>
     <packaging>pom</packaging>
     <modules>
         <module>test-itests-registry</module>
