@@ -15,22 +15,129 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.codice.ddf.spatial</groupId>
-        <artifactId>spatial</artifactId>
-        <!-- Should be the same as ddf.version -->
-        <version>2.21.0</version>
+        <groupId>ddf</groupId>
+        <artifactId>ddf-parent</artifactId>
+        <version>1.0.8</version>
     </parent>
     <version>2.21.0-SNAPSHOT</version>
     <groupId>org.codice.ddf.registry</groupId>
     <artifactId>registry</artifactId>
     <packaging>pom</packaging>
     <name>DDF :: Registry</name>
+    <description>Distributed Data Framework (DDF) Registry</description>
+    <organization>
+        <name>Codice Foundation</name>
+        <url>http://codice.org</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public v3</name>
+            <url>http://www.gnu.org/licenses/lgpl.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     <properties>
+        <!-- Must MANUALLY update this if the AC Debugger project's version changes -->
+        <acdebugger.version>1.7</acdebugger.version>
+        <antlr.version>4.3</antlr.version>
+        <awaitility.version>3.1.5</awaitility.version>
+        <!-- Must MANUALLY update this if the codice-maven project's version changes -->
+        <codice-maven.version>0.2</codice-maven.version>
+        <!-- Must MANUALLY update this if the codice-test project's version changes -->
+        <codice-test.version>0.3</codice-test.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <ddf.jaxb.version>1.0.1</ddf.jaxb.version>
+        <!--
+        NOTE: ddf-sdk.version should be removed if itests no longer require the sdk
+        Most likely DDF 2.22.0
+         -->
+        <ddf-sdk.version>2.19.0</ddf-sdk.version>
+        <ddf.support.version>2.3.16</ddf.support.version>
         <ddf.version>2.21.0</ddf.version>
+        <felix.configadmin.version>1.9.14</felix.configadmin.version>
+        <gml-v_3_1_1-schema.version>1.1.0</gml-v_3_1_1-schema.version>
+        <google-http-client.version>1.22.0</google-http-client.version>
+        <gson.version>2.8.5</gson.version>
+        <guava.version-number>25.1</guava.version-number>
+        <guava.platform>jre</guava.platform>
+        <guava.version>${guava.version-number}-${guava.platform}</guava.version>
+        <hamcrest-all.version>1.3</hamcrest-all.version>
+        <javax.inject.version>1</javax.inject.version>
+        <jaxb.version>2.2.11</jaxb.version>
+        <jknack.handlebars.version>2.0.0</jknack.handlebars.version>
+        <jsoup.version>1.11.3</jsoup.version>
+        <jts.spatial4j.version>1.15.0</jts.spatial4j.version>
+        <jts.version>1.14.0</jts.version>
+        <junit.version>4.12</junit.version>
+        <jvnet.jaxb2.version>0.10.0</jvnet.jaxb2.version>
+        <karaf.version>4.2.6</karaf.version>
+        <logback.classic.version>1.2.3</logback.classic.version>
         <mariadb.version>2.4.1</mariadb.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+        <maven.dependency.plugin.version>3.0.2</maven.dependency.plugin.version>
+        <mockito-core.version>2.8.47</mockito-core.version>
+        <mockito-all.version>1.10.19</mockito-all.version>
+        <ogc-filter-v_1_1_0-schema.thirdparty.version>1.1.0_5</ogc-filter-v_1_1_0-schema.thirdparty.version>
+        <ogc-tools-gml-jts.version>1.0.3</ogc-tools-gml-jts.version>
+        <org.geotools.bundle.version>${org.geotools.version}_2</org.geotools.bundle.version>
+        <org.geotools.version>19.1</org.geotools.version>
+        <osgi.version>5.0.0</osgi.version>
+        <ows-v_1_0_0-schema.version>1.1.0</ows-v_1_0_0-schema.version>
+        <pax.exam.version>4.13.2.CODICE</pax.exam.version>
+        <org.slf4j.version>1.7.29</org.slf4j.version>
+        <servicemix-depends.version>1.4.0</servicemix-depends.version>
+        <spring-osgi.version>1.2.1</spring-osgi.version>
+        <xmlunit.version>1.4</xmlunit.version>
+        <xstream.version>1.4.11.1</xstream.version>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.github.jknack</groupId>
+                <artifactId>handlebars</artifactId>
+                <version>${jknack.handlebars.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons-collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>${xstream.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>${jaxb.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vividsolutions</groupId>
+                <artifactId>jts-core</artifactId>
+                <version>${jts.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vividsolutions</groupId>
+                <artifactId>jts-io</artifactId>
+                <version>${jts.version}</version>
+            </dependency>
             <dependency>
                 <groupId>ddf.action.core</groupId>
                 <artifactId>action-core-api</artifactId>
@@ -101,6 +208,48 @@
                 <groupId>ddf.security.core</groupId>
                 <artifactId>security-core-api</artifactId>
                 <version>${ddf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.1.0.Final</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-runtime</artifactId>
+                <version>${antlr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+                <version>3.2.9</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.utils</artifactId>
+                <version>1.11.2</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>org.osgi.core</artifactId>
+                        <groupId>org.osgi</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>org.osgi.compendium</artifactId>
+                        <groupId>org.osgi</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.codice.ddf.registry</groupId>
@@ -228,17 +377,124 @@
                 <version>${ddf.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.thoughtworks.xstream</groupId>
-                <artifactId>xstream</artifactId>
-                <version>${xstream.version}</version>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-cql</artifactId>
+                <version>${org.geotools.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-xml</artifactId>
+                <version>${org.geotools.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jvnet.ogc</groupId>
+                <artifactId>ogc-tools-gml-jts</artifactId>
+                <version>${ogc-tools-gml-jts.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.vividsolutions</groupId>
+                        <artifactId>jts</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.jvnet.ogc</groupId>
+                        <artifactId>gml-v_3_1_1-schema</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>${osgi.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.compendium</artifactId>
+                <version>${osgi.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.jvnet.jaxb2_commons</groupId>
                 <artifactId>jaxb2-basics-runtime</artifactId>
                 <version>${jvnet.jaxb2.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${org.slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-ext</artifactId>
+                <version>${org.slf4j.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.classic.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.test</groupId>
+            <artifactId>spock-all</artifactId>
+            <version>${codice-test.version}</version>
+            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>${hamcrest-all.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito-all.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.test</groupId>
+            <artifactId>junit-extensions</artifactId>
+            <version>${codice-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.test</groupId>
+            <artifactId>spock-extensions</artifactId>
+            <version>${codice-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.test</groupId>
+            <artifactId>hamcrest-extensions</artifactId>
+            <version>${codice-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.test</groupId>
+            <artifactId>mockito-extensions</artifactId>
+            <version>${codice-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.test</groupId>
+            <artifactId>failsafe-controller</artifactId>
+            <version>${codice-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <distributionManagement>
         <snapshotRepository>
             <id>snapshots</id>
@@ -256,6 +512,88 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.5.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <!-- Disabled OBR to increase build speed -->
+                        <obrRepository>NONE</obrRepository>
+                        <instructions>
+                            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        </instructions>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>1.4.1</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>ddf.support</groupId>
+                            <artifactId>artifact-size-enforcer</artifactId>
+                            <version>${ddf.support.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>check-artifact-size</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <ArtifactSizeEnforcerRule implementation="org.codice.maven.artifactsize.ArtifactSizeEnforcerRule" />
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${maven-jacoco-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codice.maven</groupId>
+                            <artifactId>jacoco</artifactId>
+                            <version>${codice-maven.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>default-prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                            <configuration>
+                                <propertyName>jacoco.argline</propertyName>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
