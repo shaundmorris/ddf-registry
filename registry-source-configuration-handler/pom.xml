@@ -48,7 +48,6 @@
         <dependency>
             <groupId>ddf.security</groupId>
             <artifactId>ddf-security-common</artifactId>
-            <version>${ddf.version}</version>
         </dependency>
         <dependency>
             <groupId>ddf.admin.core</groupId>
@@ -66,7 +65,6 @@
         <dependency>
             <groupId>ddf.platform</groupId>
             <artifactId>platform-parser-xml</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

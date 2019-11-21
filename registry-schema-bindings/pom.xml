@@ -50,7 +50,6 @@
         <dependency>
             <groupId>org.codice.ddf.spatial</groupId>
             <artifactId>spatial-csw-schema-bindings</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>ddf.jaxb</groupId>
@@ -76,7 +75,6 @@
         <dependency>
             <groupId>ddf.platform</groupId>
             <artifactId>platform-parser-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>ddf.catalog.core</groupId>
@@ -89,7 +87,6 @@
         <dependency>
             <groupId>ddf.platform</groupId>
             <artifactId>platform-parser-xml</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -100,12 +97,10 @@
         <dependency>
             <groupId>org.codice.ddf.spatial</groupId>
             <artifactId>spatial-csw-common</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.codice.ddf</groupId>
             <artifactId>geospatial</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

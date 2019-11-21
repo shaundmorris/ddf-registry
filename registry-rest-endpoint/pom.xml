@@ -61,13 +61,11 @@
         <dependency>
             <groupId>ddf.platform</groupId>
             <artifactId>platform-parser-api</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>ddf.platform</groupId>
             <artifactId>platform-parser-xml</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

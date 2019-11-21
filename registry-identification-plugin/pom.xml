@@ -45,7 +45,6 @@
         <dependency>
             <groupId>ddf.platform</groupId>
             <artifactId>platform-parser-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
@@ -55,7 +54,6 @@
         <dependency>
             <groupId>ddf.platform</groupId>
             <artifactId>platform-parser-xml</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -69,7 +67,7 @@
         <dependency>
             <groupId>ddf.platform.util</groupId>
             <artifactId>util-uuidgenerator-api</artifactId>
-            <version>${project.version}</version>
+            <version>${ddf.version}</version>
         </dependency>
         <dependency>
             <groupId>ddf.catalog.core</groupId>

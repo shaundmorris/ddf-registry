@@ -27,7 +27,6 @@
         <dependency>
             <groupId>ddf.admin.core</groupId>
             <artifactId>admin-core-appservice</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <build>
