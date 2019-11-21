@@ -25,7 +25,7 @@
     <packaging>pom</packaging>
     <name>DDF :: Registry</name>
     <properties>
-        <ddf.version>2.20.0</ddf.version>
+        <ddf.version>2.21.0</ddf.version>
         <mariadb.version>2.4.1</mariadb.version>
     </properties>
     <dependencyManagement>
