@@ -84,7 +84,7 @@ public class RegistryPublicationServiceImpl implements RegistryPublicationServic
     ArrayList<String> locArr = new ArrayList<>(locations);
 
     metacard.setAttribute(
-        new AttributeImpl(RegistryObjectMetacardType.PUBLISHED_LOCATIONS, locArr));
+        AttributeImpl.fromMultipleValues(RegistryObjectMetacardType.PUBLISHED_LOCATIONS, locArr));
     metacard.setAttribute(
         new AttributeImpl(
             RegistryObjectMetacardType.LAST_PUBLISHED, Date.from(ZonedDateTime.now().toInstant())));
@@ -113,7 +113,7 @@ public class RegistryPublicationServiceImpl implements RegistryPublicationServic
     locArr.addAll(locations);
 
     metacard.setAttribute(
-        new AttributeImpl(RegistryObjectMetacardType.PUBLISHED_LOCATIONS, locArr));
+        AttributeImpl.fromMultipleValues(RegistryObjectMetacardType.PUBLISHED_LOCATIONS, locArr));
     metacard.setAttribute(
         new AttributeImpl(
             RegistryObjectMetacardType.LAST_PUBLISHED, Date.from(ZonedDateTime.now().toInstant())));
