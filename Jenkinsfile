@@ -117,7 +117,7 @@ pipeline {
                     sh 'mvn deploy -B -DskipStatic=true -DskipTests=true -DretryFailedDeploymentCount=10 $DISABLE_DOWNLOAD_PROGRESS_OPTS'
                 }
             }
-        }      
+        }  
         stage('Codecov') {
             steps {
                 withCredentials([string(credentialsId: 'Registry_Codecov_Token', variable: 'REGISTRY_CODECOV_TOKEN')]) {
@@ -126,17 +126,21 @@ pipeline {
             }
         }
         stage ('SonarCloud') {
+             when {
+                // Sonar Cloud only supports a single branch in the free/OSS tier
+                expression { env.BRANCH_NAME == 'master'}
+            }
+            environment {
+                SONARQUBE_GITHUB_TOKEN = credentials('registry-sonarqube-token')
+            }
             steps {
+                //catchError trap added here to prevent job failure when SonarCloud analysis upload fails
+                catchError(buildResult: null, stageResult: 'FAILURE', message: 'SonarCloud Analysis upload failed') {
+                
+                }
                 withMaven(maven: 'M35', jdk: 'jdk8-latest', globalMavenSettingsConfig: 'default-global-settings', mavenSettingsConfig: 'codice-maven-settings', mavenOpts: '${LARGE_MVN_OPTS} ${LINUX_MVN_RANDOM}') {
-                    withCredentials([string(credentialsId: 'registry-sonarqube-token', variable: 'SONARQUBE_GITHUB_TOKEN'), string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-                        script {
-                            // If this build is not a pull request, run sonar scan. otherwise run incremental scan
-                            if (env.CHANGE_ID == null) {
-                                sh 'mvn -q -B -Dcheckstyle.skip=true org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN  -Dsonar.organization=codice -Dsonar.projectKey=ddf-registry -Dsonar.exclusions=${COVERAGE_EXCLUSIONS} -pl !$ITESTS $DISABLE_DOWNLOAD_PROGRESS_OPTS'
-                            } else {
-                                sh 'mvn -q -B -Dcheckstyle.skip=true sonar:sonar -Dsonar.pullrequest.key=${CHANGE_ID} -Dsonar.github.oauth=${SONARQUBE_GITHUB_TOKEN} -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.organization=codice -Dsonar.projectKey=ddf-registry -Dsonar.exclusions=${COVERAGE_EXCLUSIONS} -pl !$ITESTS -Dgib.enabled=true -Dgib.referenceBranch=/refs/remotes/origin/$CHANGE_TARGET $DISABLE_DOWNLOAD_PROGRESS_OPTS'
-                            }
-                        }
+                    script {
+                        sh 'mvn -q -B -Dcheckstyle.skip=true org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN  -Dsonar.organization=codice -Dsonar.projectKey=ddf-registry -Dsonar.pullrequest.branch=master -Dsonar.exclusions=${COVERAGE_EXCLUSIONS} -pl !$ITESTS $DISABLE_DOWNLOAD_PROGRESS_OPTS' 
                     }
                 }
             }
