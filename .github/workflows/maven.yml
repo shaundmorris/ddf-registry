@@ -39,5 +39,5 @@ jobs:
             ${{ runner.os }}-m2-
     - uses: actions/checkout@v2
     - name: Run itests
-      run: mvn -B verify --file distribution/test/itests/test-itests-ddf/pom.xml
+      run: mvn -B verify --file distribution/test/itests/test-itests-registry/pom.xml
 
