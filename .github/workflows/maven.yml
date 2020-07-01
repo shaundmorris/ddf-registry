@@ -75,16 +75,11 @@ jobs:
           GITHUB_TOKEN: '${{ secrets.ACTION_TOKEN }}'
       - run: 'echo building now!'
         if: steps.check.outputs.triggered == 'true'
-      - uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2-
-      - name: Setup Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-      - name: Run PR Build
+        #uses: actions/cache@v2
+        #with:
+        #    path: ~/.m2/repository
+        #    key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        #    restore-keys: |
+        #      ${{ runner.os }}-m2-
         #Run the PR build without any pax-exam tests (Temporary)
-        run: mvn clean install -B -DskipITs --file pom.xml
+        #mvn clean install -B -DskipITs --file pom.xml
