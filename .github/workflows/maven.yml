@@ -9,6 +9,9 @@ on:
     branches: [ actions2 ]
   pull_request:
     branches: [ actions2 ]
+    types: [ opened ]
+  issue_comment:
+   types: [created]
 
 jobs:
   build:
@@ -60,3 +63,28 @@ jobs:
         SLACK_TITLE: Message
         SLACK_USERNAME: ${{ secrets.SLACK_USERNAME }}
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  pr_build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
+        with:
+          trigger: 'build now'
+          reaction: eyes
+        env:
+          GITHUB_TOKEN: '${{ secrets.ACTION_TOKEN }}'
+      - run: 'echo building now!'
+        if: steps.check.outputs.triggered == 'true'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Run PR Build
+        #Run the PR build without any pax-exam tests (Temporary)
+        run: mvn clean install -B -DskipITs --file pom.xml
