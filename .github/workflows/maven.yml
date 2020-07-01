@@ -30,12 +30,12 @@ jobs:
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2.0.2
       env:
-        SLACK_CHANNEL: general
+        SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
         SLACK_COLOR: '#3278BD'
         SLACK_ICON: https://avatars0.githubusercontent.com/u/6706726?s=200&v=4
         SLACK_MESSAGE: 'Successfully built ddf-registry'
         SLACK_TITLE: Message
-        SLACK_USERNAME: rtCamp
+        SLACK_USERNAME: ${{ secrets.SLACK_USERNAME }}
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
   itest:
     runs-on: ubuntu-latest
