@@ -3,6 +3,7 @@ name: PR Builds
 
 on:
   pull_request:
+    branches: actions2
   issue_comment:
     types: [created,edited]
 
