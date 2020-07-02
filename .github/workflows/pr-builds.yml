@@ -2,8 +2,9 @@
 name: PR Builds
 
 on:
+  pull_request:
   issue_comment:
-   types: [created,edited]
+    types: [created,edited]
 
 jobs:
   pr-build-check:
