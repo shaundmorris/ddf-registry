@@ -10,7 +10,7 @@
 
 Distributed Data Framework (DDF) is an open source, modular integration framework. The DDF repository can be found at [http://github.com/codice/ddf](http://github.com/codice/ddf)
 
-DDF Registry is a subset of DDF and was pulled out into a separate repo as of DDF 2.20.
+DDF Registry is a subset of DDF and was pulled out into a separate repo as of DDF v2.20.
 
 ## Additional information
 Find documentation about DDF at [codice.org](http://codice.org/ddf/Documentation-versions.html).
