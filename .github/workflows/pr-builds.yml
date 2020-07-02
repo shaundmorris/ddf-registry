@@ -4,9 +4,9 @@ name: PR Builds
 on:
   pull_request:
     branches: [ actions2 ]
-    types: [ opened ]
+    types: [ opened,edited ]
   issue_comment:
-   types: [created]
+   types: [created,edited]
 
 jobs:
   pr-build-check:
